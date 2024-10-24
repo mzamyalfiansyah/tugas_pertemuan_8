@@ -1,65 +1,72 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
+struct kelahiran {
+    int hari;
+    int bulan;
+    int tahun;
+};
 
+bool validasiTanggal(int hari, int bulan) {
+    if (bulan < 1 || bulan > 12) return false;
+    if (hari < 1 || hari > 31) return false;
 
-    struct kelahiran{
-        int hari;
-        int bulan;
-        int tahun;
-    };
+    if (bulan == 2) {
+        return (hari <= 28);
+    }
+    if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
+        return (hari <= 30);
+    }
+    return true;
+}
 
+string tentukanZodiak(int hari, int bulan) {
+    if ((bulan == 12 && hari >= 22) || (bulan == 1 && hari <= 19)) {
+        return "Capricorn";
+    } else if ((bulan == 1 && hari >= 20) || (bulan == 2 && hari <= 18)) {
+        return "Aquarius";
+    } else if ((bulan == 2 && hari >= 19) || (bulan == 3 && hari <= 20)) {
+        return "Pisces";
+    } else if ((bulan == 3 && hari >= 21) || (bulan == 4 && hari <= 19)) {
+        return "Aries";
+    } else if ((bulan == 4 && hari >= 20) || (bulan == 5 && hari <= 20)) {
+        return "Taurus";
+    } else if ((bulan == 5 && hari >= 21) || (bulan == 6 && hari <= 20)) {
+        return "Gemini";
+    } else if ((bulan == 6 && hari >= 21) || (bulan == 7 && hari <= 22)) {
+        return "Cancer";
+    } else if ((bulan == 7 && hari >= 23) || (bulan == 8 && hari <= 22)) {
+        return "Leo";
+    } else if ((bulan == 8 && hari >= 23) || (bulan == 9 && hari <= 22)) {
+        return "Virgo";
+    } else if ((bulan == 9 && hari >= 23) || (bulan == 10 && hari <= 22)) {
+        return "Libra";
+    } else if ((bulan == 10 && hari >= 23) || (bulan == 11 && hari <= 21)) {
+        return "Scorpio";
+    } else {
+        return "Sagittarius";
+    }
+}
 
-int main(){
-
+int main() {
     kelahiran tgl;
 
-    cout << "Masukkan Tanggal : ";
+    cout << "Masukkan Tanggal: ";
     cin >> tgl.hari;
 
-    cout << "Masukkan Bulan : ";
+    cout << "Masukkan Bulan: ";
     cin >> tgl.bulan;
 
-    cout << "Masukkan tahun (contoh : [1997]) : ";
+    cout << "Masukkan tahun (contoh: [1997]): ";
     cin >> tgl.tahun;
 
+    if (!validasiTanggal(tgl.hari, tgl.bulan)) {
+        cout << "Tanggal tidak valid!" << endl;
+        return 1;
+    }
 
-    if ((tgl.bulan == 12 && tgl.hari >= 22) || (tgl.bulan == 1 && tgl.hari <= 19)){
-        cout << "Capricorn" << endl;
-    }
-    else if ((tgl.bulan == 1 && tgl.hari >= 20) || (tgl.bulan == 2 && tgl.hari <= 18)){
-        cout << "Aquarius" << endl;
-    }
-    else if ((tgl.bulan == 2 && tgl.hari >= 19) || (tgl.bulan == 3 && tgl.hari <= 20)){
-        cout << "Pisces" << endl;
-    }
-    else if ((tgl.bulan == 3 && tgl.hari >= 21) || (tgl.bulan == 4 && tgl.hari <= 19)){
-        cout << "Aries" << endl;
-    }
-    else if ((tgl.bulan == 4 && tgl.hari >= 20) || (tgl.bulan == 5 && tgl.hari <= 20)){
-        cout << "Taurus" <<endl;
-    }
-    else if ((tgl.bulan == 5 && tgl.hari >= 21) || (tgl.bulan == 6 && tgl.hari <= 20)){
-        cout << "Gemini" << endl;
-    }
-    else if ((tgl.bulan == 6 && tgl.hari >= 21) || (tgl.bulan == 7 && tgl.hari <= 22)){
-        cout << "Cancer" << endl;
-    }
-    else if ((tgl.bulan == 7 && tgl.hari >= 23) || (tgl.bulan == 8 && tgl.hari <= 22)){
-        cout << "Leo" << endl;
-    }
-    else if ((tgl.bulan == 8 && tgl.hari >= 23) || (tgl.bulan == 9 && tgl.hari <= 22)){
-        cout << "Virgo" << endl;
-    }
-    else if ((tgl.bulan == 9 && tgl.hari >= 23) || (tgl.bulan == 10 && tgl.hari <= 22)){
-        cout << "Libra" << endl;
-    }
-    else if ((tgl.bulan == 10 && tgl.hari >= 23) || (tgl.bulan == 11 && tgl.hari <= 21)){
-        cout << "Scorpio" << endl;
-    }
-    else{
-        cout << "Sagittarius" << endl;
-    }
+    string zodiak = tentukanZodiak(tgl.hari, tgl.bulan);
+    cout << "Zodiak Anda: " << zodiak << endl;
 
     return 0;
 }
